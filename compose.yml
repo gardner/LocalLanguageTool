@@ -1,0 +1,10 @@
+services:
+  languagetool:
+    image: silviof/docker-languagetool:latest
+    restart: unless-stopped
+    command: java -cp languagetool-server.jar org.languagetool.server.HTTPServer --port 8010 --public --allow-origin '*' --config /etc/http_server.cfg
+    ports:
+      - 127.0.0.1:8010:8010
+    volumes:
+      - ./ngrams:/ngrams
+      - ./http_server.cfg:/etc/http_server.cfg
